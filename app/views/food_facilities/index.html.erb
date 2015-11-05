@@ -15,10 +15,9 @@
   </div>
 </div>
 
-
-<% if @food_facilites %>
+<% if @food_facilities.present? %>
   <ul>
-    <% @food_facilites.each do |food_facility| %>
+    <% @food_facilities.each do |food_facility| %>
     <li>
       <pre>
         <%= food_facility %>

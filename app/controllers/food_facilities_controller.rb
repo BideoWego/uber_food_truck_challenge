@@ -1,9 +1,9 @@
 class FoodFacilitiesController < ApplicationController
   def index
-    if params[:food].nil?
-      @food_facilities = nil
-    else
+    if params[:food].empty?
       @food_facilities = FoodFacility.all
+    else
+      @food_facilities = FoodFacility.q(params[:food])
     end
   end
 
