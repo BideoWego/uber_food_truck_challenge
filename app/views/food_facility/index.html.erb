@@ -4,10 +4,10 @@
       <%= form_tag('/input') do %>
       
         <%= label_tag :address, 'Address' %>
-        <%= text_field_tag('address'), class: 'form-control' %>
+        <%= text_field_tag 'address', '', class: 'form-control' %>
 
         <%= label_tag :food, 'Enter types of food' %>
-        <%= text_field_tag('food'), class: 'form-control' %>
+        <%= text_field_tag 'food', '', class: 'form-control' %>
 
         <%= submit_tag %>
 

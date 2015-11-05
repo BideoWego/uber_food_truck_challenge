@@ -40,6 +40,7 @@ var MapWindow = function() {
 
 var map;
 function initMap() {
+  //need a center position here
   var ll = {lat: -25.363, lng: 131.044};
 
   map = new google.maps.Map(document.getElementById('map'), {
@@ -47,16 +48,21 @@ function initMap() {
     zoom: 8
   });
 
+  //collection markers
+  //each with a lat and long
+  //title
   var marker = new google.maps.Marker({
     position: ll,
     map: map,
     title: 'Hello World!'
   });
 
+  //collection windows
   var infowindow = new google.maps.InfoWindow({
     content: new MapWindow().toString()
   });
 
+  //collection listeners
   marker.addListener('click', function() {
     infowindow.open(map, marker);
   });

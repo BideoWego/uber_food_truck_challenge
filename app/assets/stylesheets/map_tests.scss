@@ -4,12 +4,28 @@
 
 
 html,
-body {
-  height: 100%;
+body,
+#map-wrap {
   margin: 0;
   padding: 0;
 }
 
-#map {
+html,
+body,
+#app,
+#map-wrap,
+#form-wrap {
   height: 100%;
+}
+
+#map-wrap {
+  position: relative;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
