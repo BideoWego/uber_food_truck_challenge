@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  root :to => 'map_tests#index'
+  root 'food_facility#index'
+  resources :food_facility, :only => [:index]
+
+  get '/map_test', :to => 'map_tests#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
