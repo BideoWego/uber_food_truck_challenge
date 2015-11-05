@@ -1,30 +1,33 @@
-<div class='row'>
-  <div class='col-xs-4'>
-    <div class='form-group'>
-      <%= form_tag('/food_facilities') do %>
+<div id="app" class="row well">
+  <div class="col-md-6">
 
-        <%= label_tag :food do %>
-          Input Foods:
-        <% end %>
-        <%= text_field_tag :food, nil, class: 'form-control' %>
+    <%= form_tag(
+        '/food_facilities',
+        :id => 'map-form'
+      ) do %>
+      <div class="form-group">
+        <%= text_field_tag('food', nil, :class => 'form-control', :placeholder => 'Food...') %>
+      </div>
+      <button type="submit" class="btn btn-primary">Find Food Trucks, I'm Hungry!</button>
+    <% end %>
 
-        <br>
-        <%= submit_tag "Submit" %>
+    <br>
+
+    <h2>
+      Food Trucks:
+    </h2>
+
+    <ul class="list-group">
+      <% @food_facilities.each do |food_facility| %>
+        <pre>
+          <%= food_facility %>
+        </pre>
       <% end %>
-    </div>
+    </ul>
+
+  </div>
+
+  <div id="map-wrap" class="col-md-6">
+      <div id="map"></div>
   </div>
 </div>
-
-<% if @food_facilities.present? %>
-  <ul>
-    <% @food_facilities.each do |food_facility| %>
-    <li>
-      <pre>
-        <%= food_facility %>
-      </pre>
-    </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No results</p>
-<% end %>

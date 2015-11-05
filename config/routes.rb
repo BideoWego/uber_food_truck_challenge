@@ -3,8 +3,6 @@ Rails.application.routes.draw do
   resources :food_facilities, :only => [:index]
   post '/food_facilities', :to => 'food_facilities#index'
 
-  get '/map_test', :to => 'map_tests#index'
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
