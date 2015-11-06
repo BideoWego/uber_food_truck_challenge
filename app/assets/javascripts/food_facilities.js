@@ -5,7 +5,7 @@
 var ResultList = function(foodFacilities) {
   this.foodFacilities = foodFacilities;
 
-  this.toString() = function() {
+  this.toString = function() {
     var str = '<ul class="list-group">';
     for (var i = 0; i < this.foodFacilities.length; i++) {
       str += new ResultListItem(this.foodFacilities[i]).toString();
@@ -27,7 +27,7 @@ var ResultListItem = function(foodFacility) {
   foodFacility['fooditems'] = foodFacility['fooditems'] || '-';
   this.foodFacility = foodFacility;
 
-  this.toString() = function() {
+  this.toString = function() {
     var str = '<li class="list-group-item">' +
       '<div class="result-wrap">' +
         '<h3>' + this.foodFacility['applicant'] + '</h3>' +

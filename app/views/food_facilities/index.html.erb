@@ -19,7 +19,7 @@
         <h2>
           Food Trucks:
         </h2>
-        <p id="default">No results yet</p>
+        <p id="no-results">No results yet</p>
       </div>
     </div>
 
@@ -50,10 +50,9 @@
         // console.log(jqXHR, textStatus);
       },
       success: function(data, textStatus, jqXHR) {
-
-        //pass to maps
         initMap(data);
-
+        $('#no-results').remove();
+        $('#results').append($(new ResultList(data).toString()));
         // console.log(data, textStatus, jqXHR);
       }
     });
