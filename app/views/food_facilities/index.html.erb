@@ -1,33 +1,55 @@
-<div id="app" class="row well">
-  <div class="col-md-6">
+<div id="app" class="row">
+  <div class="col-md-4">
 
-    <%= form_tag(
-        '/food_facilities',
-        :id => 'map-form'
-      ) do %>
-      <div class="form-group">
-        <%= text_field_tag('food', nil, :class => 'form-control', :placeholder => 'Food...') %>
-      </div>
-      <button type="submit" class="btn btn-primary">Find Food Trucks, I'm Hungry!</button>
-    <% end %>
+    <div class="well">
 
-    <br>
-
-    <h2>
-      Food Trucks:
-    </h2>
-
-    <ul class="list-group">
-      <% @food_facilities.each do |food_facility| %>
-        <pre>
-          <%= food_facility %>
-        </pre>
+      <%= form_tag(
+          '/food_facilities',
+          :id => 'map-form'
+        ) do %>
+        <div class="form-group">
+          <%= text_field_tag('food', nil, :class => 'form-control', :placeholder => 'Food...') %>
+        </div>
+        <button type="submit" class="btn btn-primary">Find Food Trucks, I'm Hungry!</button>
       <% end %>
-    </ul>
+
+      <br>
+
+      <div id="results">
+        <h2>
+          Food Trucks:
+        </h2>
+        <p id="default">No results yet</p>
+      </div>
+    </div>
 
   </div>
 
-  <div id="map-wrap" class="col-md-6">
+  <div id="map-wrap" class="col-md-8">
       <div id="map"></div>
   </div>
 </div>
+
+
+  <script>
+    $('#map-form').submit(function(e) {
+      e.preventDefault();
+
+      $.ajax({
+        url: '/food_facilities',
+        type: 'POST',
+        data: {
+          utf8: $('#map-form input[name="utf8"]').val(),
+          authenticity_token: $('#map-form input[name="authenticity_token"]').val(),
+          food: $('#food').val()
+        },
+        dataType: 'json',
+        complete: function() {
+          console.log('Complete');
+        },
+        success: function(data) {
+          console.log(data);
+        }
+      });
+    });
+  </script>
