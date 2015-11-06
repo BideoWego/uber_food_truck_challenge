@@ -3,8 +3,6 @@ class FoodFacility
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :address, :food
-
   APP_TOKEN = ENV['sfdata_app_token']
   DOMAIN = 'data.sfgov.org'
   ENDPOINT = 'rqzj-sfat'
@@ -29,7 +27,7 @@ class FoodFacility
   end
 
   def self.q(str)
-    @@client.get(ENDPOINT, { "$q" => str, "$limit" => 10, "$where" => "latitude IS NOT NULL AND longitude IS NOT NULL"} )
+    @@client.get(ENDPOINT, { "$q" => str, "$limit" => 30, "$where" => "latitude IS NOT NULL AND longitude IS NOT NULL" })
   end
 
   def self.q_user_input(food = "pizza", coord = [37.79, -122.39])

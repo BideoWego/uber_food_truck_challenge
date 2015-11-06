@@ -26,7 +26,6 @@ var ResultListItem = function(foodFacility) {
   foodFacility['dayshours'] = foodFacility['dayshours'] || '-';
   foodFacility['fooditems'] = foodFacility['fooditems'] || '-';
   this.foodFacility = foodFacility;
-
   this.toString = function() {
     var str = '<li class="list-group-item">' +
       '<div class="result-wrap">' +
@@ -116,16 +115,4 @@ function initMap(data, position) {
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 

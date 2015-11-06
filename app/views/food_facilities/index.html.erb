@@ -2,13 +2,12 @@
   <div class="col-md-4">
 
     <div class="well">
-
       <%= form_tag(
           '/food_facilities',
           :id => 'map-form'
         ) do %>
         <div class="form-group">
-          <%= text_field_tag('q', nil, :class => 'form-control', :placeholder => 'Search...') %>
+          <%= text_field_tag('q', nil, :class => 'form-control', :placeholder => 'Search By Street or Food Type...') %>
         </div>
         <button type="submit" class="btn btn-primary">Find Food Trucks, I'm Hungry!</button>
       <% end %>
@@ -33,7 +32,6 @@
 <script>
   $('#map-form').submit(function(e) {
     e.preventDefault();
-
     $.ajax({
       url: '/food_facilities',
       type: 'POST',
@@ -59,16 +57,9 @@
         var numResults = parseInt(data.length);
         var messageText = (q == '') ? 'Showing first ' + numResults + ' results' : 'Showing first ' + numResults +' results for: ' + q;
         displayFlashMessage(messageText);
-
         // console.log(data, textStatus, jqXHR);
       }
     });
   });
 </script>
-
-
-
-
-
-
 

@@ -51,6 +51,13 @@ group :development, :test do
   gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
 end
 
+group :production do
+
+  gem 'rails_12factor'
+
+end
+
 gem 'binding_of_caller'
 
 gem "twitter-bootstrap-rails"
+
