@@ -13,4 +13,11 @@ Create a service that tells the user what types of food trucks might be found ne
 - Ruby on Rails
 
 ###Live Site
-[On Heroku](#)
+[On Heroku](https://uber-food-truck-challenge.herokuapp.com)
+
+###Developed by
+[leedu708](https://github.com/leedu708) and [Bideo Wego](https://github.com/BideoWego)
+
+###Assignment by [Viking Code School](http://vikingcodeschool.com)
+
+###Challenge by [Uber](https://uber.com
