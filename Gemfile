@@ -1,7 +1,9 @@
 source 'https://rubygems.org'
+ruby ENV["RBENV_VERSION"] || "2.2.0"
 
 gem 'soda-ruby', :require => 'soda'
-gem "figaro"
+gem 'figaro'
+gem 'puma'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
