@@ -20,16 +20,21 @@ var ResultList = function(foodFacilities) {
 //--------------------------------------------
 
 var ResultListItem = function(foodFacility) {
+  foodFacility['applicant'] = foodFacility['applicant'] || '-';
+  foodFacility['locationdescription'] = foodFacility['locationdescription'] || '-';
+  foodFacility['address'] = foodFacility['address'] || '-';
+  foodFacility['dayshours'] = foodFacility['dayshours'] || '-';
+  foodFacility['fooditems'] = foodFacility['fooditems'] || '-';
   this.foodFacility = foodFacility;
 
   this.toString() = function() {
     var str = '<li class="list-group-item">' +
       '<div class="result-wrap">' +
-        '<h3>' + this.foodFacility.applicant + '</h3>' +
-        '<p>Location: ' + this.foodFacility.locationDescription + '</p>' +
-        '<p>Address: ' + this.foodFacility.address + '</p>' +
-        '<p>Hours: ' + this.foodFacility.daysHours + '</p>' +
-        '<p>Foods: ' + this.foodFacility.foodItems + '</p>' +
+        '<h3>' + this.foodFacility['applicant'] + '</h3>' +
+        '<p>Location: ' + this.foodFacility['locationdescription'] + '</p>' +
+        '<p>Address: ' + this.foodFacility['address'] + '</p>' +
+        '<p>Hours: ' + this.foodFacility['dayshours'] + '</p>' +
+        '<p>Foods: ' + this.foodFacility['fooditems'] + '</p>' +
       '</div>';
     str += '</li>';
     return str;
@@ -42,18 +47,23 @@ var ResultListItem = function(foodFacility) {
 
 
 var MapWindow = function(foodFacility) {
+  foodFacility['locationdescription'] = foodFacility['locationdescription'] || '-';
+  foodFacility['address'] = foodFacility['address'] || '-';
+  foodFacility['fooditems'] = foodFacility['fooditems'] || '-';
+  foodFacility['facilitytype'] = foodFacility['facilitytype'] || '-';
+  foodFacility['dayshours'] = foodFacility['dayshours'] || '-';
   this.foodFacility = foodFacility;
 
   this.toString = function() {
     return '<div id="content">'+
       '<div id="siteNotice"></div>'+
-        '<h1 id="firstHeading" class="firstHeading">' + this.foodFacility.applicant +'</h1>'+
+        '<h1 id="firstHeading" class="firstHeading">' + this.foodFacility['applicant'] + '</h1>'+
         '<div id="bodyContent">'+
-          '<p>Location: ' + this.foodFacility.locationDescription + '</p>' +
-          '<p>Address: ' + this.foodFacility.address + '</p>' + 
-          '<p>Foods: ' + foodFacilit.foodItems + '</p>' + 
-          '<p>Type: ' + this.foodFacility.facilityType + '</p>' +
-          '<p>Hours: ' + this.foodFacility.daysHours + '</p>' +
+          '<p>Location: ' + this.foodFacility['locationdescription'] + '</p>' +
+          '<p>Address: ' + this.foodFacility['address'] + '</p>' +
+          '<p>Foods: ' + this.foodFacility['fooditems'] + '</p>' +
+          '<p>Type: ' + this.foodFacility['facilitytype'] + '</p>' +
+          '<p>Hours: ' + this.foodFacility['dayshours'] + '</p>' +
       '</div>'+
     '</div>';
   };
@@ -64,9 +74,9 @@ var MapWindow = function(foodFacility) {
 //--------------------------------------------
 
 var map;
+var markers;
+var infoWindows;
 function initMap(data, position) {
-  console.log(data, position);
-
   //need a center position here
   var ll = position || {lat: 37.78, lng: -122.4};
 
@@ -75,23 +85,47 @@ function initMap(data, position) {
     zoom: 10
   });
 
-  // //collection markers
-  // //each with a lat and long
-  // //title
-  // var marker = new google.maps.Marker({
-  //   position: ll,
-  //   map: map,
-  //   title: 'Hello World!'
-  // });
+  //collection markers
+  //each with a lat and long
+  //title
+  if (data) {
+    markers = [];
+    for (var i = 0; i < data.length; i++) {
+      var foodFacility = data[i];
 
-  // //collection windows
-  // var infowindow = new google.maps.InfoWindow({
-  //   content: new MapWindow().toString()
-  // });
+      var marker = new google.maps.Marker({
+        position: {
+          lat: parseFloat(foodFacility['location']['latitude']),
+          lng: parseFloat(foodFacility['location']['longitude'])
+        },
+        map: map,
+        title: foodFacility['applicant']
+      });
+      marker['index'] = i;
 
-  // //collection listeners
-  // marker.addListener('click', function() {
-  //   infowindow.open(map, marker);
-  // });
+      //collection listeners
+      google.maps.event.addListener(marker, 'click', function() {
+          var infowindow = new google.maps.InfoWindow({
+            content: new MapWindow(data[this.index]).toString()
+          });
+
+          infowindow.open(map, this);
+      });
+
+      markers.push(marker);
+    }
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
