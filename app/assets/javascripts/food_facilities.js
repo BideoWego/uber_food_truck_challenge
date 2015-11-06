@@ -12,7 +12,6 @@ var FoodFacility = function(attributes) {
   _setAttributes.call(this, attributes);
 };
 
-
 // <ul class="list-group">
 //   <li class="list-group-item">
 //     <div class="result">
@@ -35,6 +34,7 @@ var FoodFacility = function(attributes) {
 //--------------------------------------------
 // MapWindow
 //--------------------------------------------
+
 
 var MapWindow = function(foodFacility) {
   this.foodFacility = foodFacility;
@@ -89,8 +89,6 @@ function initMap(position, data) {
     infowindow.open(map, marker);
   });
 
+
 }
-
-
-
 

@@ -30,26 +30,25 @@
   </div>
 </div>
 
+<script>
+  $('#map-form').submit(function(e) {
+    e.preventDefault();
 
-  <script>
-    $('#map-form').submit(function(e) {
-      e.preventDefault();
-
-      $.ajax({
-        url: '/food_facilities',
-        type: 'POST',
-        data: {
-          utf8: $('#map-form input[name="utf8"]').val(),
-          authenticity_token: $('#map-form input[name="authenticity_token"]').val(),
-          food: $('#food').val()
-        },
-        dataType: 'json',
-        complete: function() {
-          console.log('Complete');
-        },
-        success: function(data) {
-          console.log(data);
-        }
-      });
+    $.ajax({
+      url: '/food_facilities',
+      type: 'POST',
+      data: {
+        utf8: $('#map-form input[name="utf8"]').val(),
+        authenticity_token: $('#map-form input[name="authenticity_token"]').val(),
+        food: $('#food').val()
+      },
+      dataType: 'json',
+      complete: function() {
+        console.log('Complete');
+      },
+      success: function(data) {
+        console.log(data);
+      }
     });
-  </script>
+  });
+</script>

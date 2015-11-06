@@ -25,11 +25,11 @@ class FoodFacility
   end
 
   def self.all
-    @@client.get(ENDPOINT)
+    @@client.get(ENDPOINT, { "$limit" => 30 })
   end
 
   def self.q(str)
-    @@client.get(ENDPOINT, '$q' => str)
+    @@client.get(ENDPOINT, { "$q" => str, "$limit" => 10} )
   end
 
   def self.q_user_input(food = "pizza", coord = [37.79, -122.39])
@@ -46,11 +46,11 @@ class FoodFacility
                "$q"     => food_query,
                "$limit" => 10 }
 
-    response = @@client.get(ENDPOINT, params).select { |key, value| key.to_s.match('location') }
+    response = @@client.get(ENDPOINT, params)
 
   end
 
-  def get_food_query(fooditems)
+  def self.get_food_query(fooditems)
 
     query = ""
 

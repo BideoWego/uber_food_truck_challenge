@@ -1,16 +1,17 @@
 class FoodFacilitiesController < ApplicationController
   def index
-    # if params[:food] && params[:food].empty?
-    #   @food_facilities = FoodFacility.all
-    # else
-    #   @food_facilities = FoodFacility.q(params[:food])
-    # end
+    if params[:food] && params[:food].empty?
+      @food_facilities = FoodFacility.all
+    else
+      @food_facilities = FoodFacility.q(params[:food])
+    end
     
     respond_to do |format|
       format.html
       format.json
     end
   end
+
 
 
   private
