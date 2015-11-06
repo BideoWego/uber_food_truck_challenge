@@ -43,11 +43,18 @@
         food: $('#food').val()
       },
       dataType: 'json',
-      complete: function() {
-        console.log('Complete');
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log(jqXHR, textStatus, errorThrown);
       },
-      success: function(data) {
-        console.log(data);
+      complete: function(jqXHR, textStatus) {
+        console.log(jqXHR, textStatus);
+      },
+      success: function(data, textStatus, jqXHR) {
+
+        //pass to maps
+        initMap(data);
+
+        console.log(data, textStatus, jqXHR);
       }
     });
   });
