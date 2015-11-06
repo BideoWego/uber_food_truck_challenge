@@ -1,7 +1,7 @@
 class FoodFacilitiesController < ApplicationController
   def index
-    @food_facilities = FoodFacility.q(params[:food]) if params[:food]
-    
+    @food_facilities = FoodFacility.q(params[:q]) if params[:q]
+
     respond_to do |format|
       format.html
       format.json {render :json => @food_facilities.to_json}
@@ -12,6 +12,6 @@ class FoodFacilitiesController < ApplicationController
 
   private
   def food_facility_params
-    params.permit(:food)
+    params.permit(:q)
   end
 end

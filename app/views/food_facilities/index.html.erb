@@ -8,7 +8,7 @@
           :id => 'map-form'
         ) do %>
         <div class="form-group">
-          <%= text_field_tag('food', nil, :class => 'form-control', :placeholder => 'Food...') %>
+          <%= text_field_tag('q', nil, :class => 'form-control', :placeholder => 'Search...') %>
         </div>
         <button type="submit" class="btn btn-primary">Find Food Trucks, I'm Hungry!</button>
       <% end %>
@@ -40,7 +40,7 @@
       data: {
         utf8: $('#map-form input[name="utf8"]').val(),
         authenticity_token: $('#map-form input[name="authenticity_token"]').val(),
-        food: $('#food').val()
+        q: $('#q').val()
       },
       dataType: 'json',
       error: function(jqXHR, textStatus, errorThrown) {
@@ -52,7 +52,14 @@
       success: function(data, textStatus, jqXHR) {
         initMap(data);
         $('#no-results').remove();
+        $('#result-list').remove();
         $('#results').append($(new ResultList(data).toString()));
+
+        var q = $('#q').val();
+        var numResults = parseInt(data.length);
+        var messageText = (q == '') ? 'Showing first ' + numResults + ' results' : 'Showing first ' + numResults +' results for: ' + q;
+        displayFlashMessage(messageText);
+
         // console.log(data, textStatus, jqXHR);
       }
     });
